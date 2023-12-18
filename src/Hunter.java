@@ -199,4 +199,12 @@ public class Hunter {
 
         return -1;
     }
+
+    public void addAllitems() {
+        kit[0] = "water";
+        kit[1] = "rope";
+        kit[2] = "machete";
+        kit[3] = "horse";
+        kit[4] = "boat";
+    }
 }
