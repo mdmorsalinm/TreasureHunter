@@ -16,7 +16,7 @@ public class Terrain {
      */
     public Terrain(String name, String item) {
         terrainName = Colors.CYAN + name + Colors.RESET;
-        neededItem = item.toLowerCase();
+        neededItem = Colors.PURPLE + item.toLowerCase() + Colors.RESET;
     }
 
     // accessors
