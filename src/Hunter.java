@@ -36,10 +36,6 @@ public class Hunter {
         gold += modifier;
         if (gold < 0) {
             TreasureHunter.setLose(true);
-            System.out.println(Colors.RED + "You lost the brawl." + Colors.RESET);
-            System.out.println("You have a debt of " + Colors.YELLOW + (gold * -1) + " gold" + Colors.RESET);
-            System.out.println("You spend the rest of your days paying back the debt.");
-            System.out.println("You died of old age.");
         }
     }
 
