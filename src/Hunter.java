@@ -9,6 +9,7 @@ public class Hunter {
     private String hunterName;
     private String[] kit;
     private int gold;
+    private String[] treasureList;
 
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
@@ -20,11 +21,15 @@ public class Hunter {
         this.hunterName = hunterName;
         kit = new String[6]; // only 5 possible items can be stored in kit
         gold = startingGold;
+        treasureList = new String[3];
     }
 
     //Accessors
     public String getHunterName() {
         return hunterName;
+    }
+    public int getGold(){
+        return gold;
     }
 
     /**
@@ -36,6 +41,7 @@ public class Hunter {
         gold += modifier;
         if (gold < 0) {
             TreasureHunter.setLose(true);
+            gold *= -1;
         }
     }
 
@@ -207,5 +213,20 @@ public class Hunter {
         kit[3] = "horse";
         kit[4] = "boat";
         kit[5] = "boots";
+    }
+    public void addTreasure(String treasure){
+        for (String t: treasureList){
+            if (t == treasure){
+                System.out.println("You already found this treasure!");
+                System.out.println("You have decided to abandon this treasure.");
+            }
+        }
+        if (treasure == "crown"){
+            treasureList[0] = treasure;
+        }else if (treasure == "trophy"){
+            treasureList[1] = treasure;
+        } else if (treasure == "gem"){
+            treasureList[2] = treasure;
+        }
     }
 }
