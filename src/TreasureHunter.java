@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class TreasureHunter {
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static boolean lose;
 
     // instance variables
     private Town currentTown;
@@ -25,6 +26,10 @@ public class TreasureHunter {
         currentTown = null;
         hunter = null;
         hardMode = false;
+        lose = false;
+    }
+    public static void setLose(boolean l){
+        lose = l;
     }
 
     /**
@@ -97,7 +102,7 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
 
-        while (!choice.equals("x")) {
+        while (!choice.equals("x") && !lose) {
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
