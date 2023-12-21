@@ -155,10 +155,10 @@ public class Hunter {
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }
-        str += "\n Treasures found: " + Colors.YELLOW;
+        str += "\nTreasures found: " + Colors.YELLOW;
         int i = 0;
         for (String t : treasureList){
-            if (!t.equals("null")){
+            if (t != null){
                 str += t + " ";
             }else{
                 i ++;
