@@ -12,6 +12,7 @@ public class TreasureHunter {
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
     private static boolean lose;
+    private static boolean win;
 
     // instance variables
     private Town currentTown;
@@ -27,12 +28,16 @@ public class TreasureHunter {
         hunter = null;
         hardMode = false;
         lose = false;
+        win = false;
     }
     public static void setLose(boolean l){
         lose = l;
     }
     public static boolean getLose(){
         return lose;
+    }
+    public static void win(){
+        win = true;
     }
 
     /**
@@ -105,7 +110,7 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
 
-        while (!choice.equals("x") && !lose) {
+        while (!choice.equals("x") && !lose && !win) {
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");
@@ -122,6 +127,10 @@ public class TreasureHunter {
             System.out.print("What's your next move? ");
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
+        }
+        if (win == true){
+            System.out.println(Colors.GREEN + "YOU WIN!");
+            System.out.println("You are now the best hunter in the world!" + Colors.RESET);
         }
     }
 

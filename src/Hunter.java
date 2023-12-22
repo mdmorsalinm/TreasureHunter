@@ -167,6 +167,9 @@ public class Hunter {
         if (i == 3){
             str += "none";
         }
+        if (i == 0){
+            TreasureHunter.win();
+        }
         str += Colors.RESET;
         return str;
     }
