@@ -19,7 +19,7 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[6]; // only 5 possible items can be stored in kit
+        kit = new String[7]; // only 5 possible items can be stored in kit
         gold = startingGold;
         treasureList = new String[3];
     }
@@ -226,6 +226,7 @@ public class Hunter {
         kit[3] = "horse";
         kit[4] = "boat";
         kit[5] = "boots";
+        kit[6] = "shovel";
     }
     public void addTreasure(String treasure){
         for (String t: treasureList){
