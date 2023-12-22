@@ -15,6 +15,7 @@ public class Shop {
     private static final int HORSE_COST = 12;
     private static final int BOAT_COST = 20;
     private static final int SHOVEL_COST = 8;
+    private static final int SWORD_COST = 0;
 
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -22,6 +23,7 @@ public class Shop {
     // instance variables
     private double markdown;
     private Hunter customer;
+    private TreasureHunter treasureHunter;
 
     /**
      * The Shop constructor takes in a markdown value and leaves customer null until one enters the shop.
@@ -41,6 +43,7 @@ public class Shop {
      */
     public void enter(Hunter hunter, String buyOrSell) {
         customer = hunter;
+        treasureHunter = new TreasureHunter();
 
         if (buyOrSell.equals("b")) {
             System.out.println("Welcome to the shop! We have the finest wares in town.");
@@ -91,7 +94,9 @@ public class Shop {
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
         str += "Shovel: " + SHOVEL_COST + " gold\n";
-
+        if (treasureHunter.isSamuraiMode()) {
+            str += "Sword: " + SWORD_COST + " gold\n";
+        }
         return str;
     }
 

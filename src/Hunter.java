@@ -19,7 +19,7 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[7]; // only 5 possible items can be stored in kit
+        kit = new String[8]; // only 8 possible items can be stored in kit
         gold = startingGold;
         treasureList = new String[3];
     }
@@ -53,6 +53,10 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
+        if (hasItemInKit("Sword")){
+            addItem(item);
+            return true;
+        }
         if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
             return false;
         }
