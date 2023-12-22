@@ -14,6 +14,7 @@ public class Town {
     private String treasure;
     private boolean searched;
     private boolean digged;
+    private TreasureHunter treasureHunter;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -28,6 +29,7 @@ public class Town {
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
         hunter = null;
+        treasureHunter = new TreasureHunter();
 
         printMessage = "";
 
@@ -112,6 +114,10 @@ public class Town {
             noTroubleChance = 0.33;
         }
 
+        if (treasureHunter.isEasyMode()) {
+            noTroubleChance = 0.10;
+        }
+
         if (Math.random() > noTroubleChance) {
             printMessage = "You couldn't find any trouble";
         } else {
@@ -167,6 +173,9 @@ public class Town {
      * @return true if the item broke.
      */
     private boolean checkItemBreak() {
+        if (treasureHunter.isEasyMode()) {
+            return false;
+        }
         double rand = Math.random();
         return (rand < 0.5);
     }
@@ -191,9 +200,11 @@ public class Town {
                 } else {
                     printMessage = "You dug but only found dirt";
                 }
-                hunter.removeItemFromKit("shovel");
                 digged = true;
-                printMessage += "\nUnfortunately, you lost your shovel";
+                if (checkItemBreak()) {
+                    hunter.removeItemFromKit("shovel");
+                    printMessage += "\nUnfortunately, you lost your shovel";
+                }
             } else {
                 printMessage = "You can't dig for gold without a shovel";
             }
