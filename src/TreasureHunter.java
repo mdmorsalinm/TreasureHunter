@@ -11,15 +11,16 @@ import java.util.Scanner;
 public class TreasureHunter {
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static boolean lose;
-    private static boolean win;
+    private static boolean lose = false;
+    private static boolean win = false;
 
     // instance variables
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
     private boolean easyMode;
-    private static boolean samuraiMode;
+    public static boolean samuraiMode = false;
+    public static boolean hasSword = false;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -29,10 +30,7 @@ public class TreasureHunter {
         currentTown = null;
         hunter = null;
         hardMode = false;
-        lose = false;
-        win = false;
         easyMode = false;
-        samuraiMode = false;
     }
     public static void setLose(boolean l){
         lose = l;
@@ -46,10 +44,6 @@ public class TreasureHunter {
 
     public boolean isEasyMode() {
         return easyMode;
-    }
-
-    public boolean isSamuraiMode() {
-        return samuraiMode;
     }
 
     /**
@@ -73,7 +67,7 @@ public class TreasureHunter {
         // set hunter instance variable
         hunter = new Hunter(name, 10);
 
-        System.out.print("Mode: (h)ard, (n)ormal, (e)asy?: ");
+        System.out.print("Mode: (h)ard, (n)ormal, (e)asy, (s)amurai?: ");
         String mode = SCANNER.nextLine().toLowerCase();
         if (mode.equals("h")) {
             hardMode = true;
@@ -152,7 +146,7 @@ public class TreasureHunter {
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
         }
-        if (win == true){
+        if (win){
             System.out.println(Colors.GREEN + "YOU WIN!");
             System.out.println("You are now the best hunter in the world!" + Colors.RESET);
         }

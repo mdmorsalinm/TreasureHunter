@@ -53,11 +53,18 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
-        if (hasItemInKit("Sword")){
+        if (item.toLowerCase().equals("sword")){
             addItem(item);
+            TreasureHunter.hasSword = true;
+            Shop.setWATERCOST(0);
+            Shop.setROPECOST(0);
+            Shop.setMACHETECOST(0);
+            Shop.setHORSECOST(0);
+            Shop.setBOATCOST(0);
+            Shop.setBOOTSCOST(0);
+            Shop.setSHOVELCOST(0);
             return true;
-        }
-        if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
+        }else if ((costOfItem == 0 && !TreasureHunter.samuraiMode) || gold < costOfItem || hasItemInKit(item)) {
             return false;
         }
 

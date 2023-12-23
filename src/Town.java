@@ -121,25 +121,27 @@ public class Town {
         if (Math.random() > noTroubleChance) {
             printMessage = "You couldn't find any trouble";
         } else {
-            printMessage = Colors.RED + "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (hunter.hasItemInKit("sword")) {
-                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
-                printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + " gold." + Colors.RESET;
+                printMessage = Colors.GREEN + "It seems that the opponent has ran away\n";
+                printMessage += "You won the brawl and receive " + Colors.YELLOW + goldDiff + " gold.\n" + Colors.RESET;
                 hunter.changeGold(goldDiff);
-            } else if (Math.random() > noTroubleChance) {
-                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
-                printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + " gold." + Colors.RESET;
-                hunter.changeGold(goldDiff);
-            } else {
-                printMessage += Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
-                printMessage += "\nYou lost the brawl and pay " + Colors.RESET + Colors.YELLOW + goldDiff + " gold." + Colors.RESET;
-                System.out.println(printMessage);
-                hunter.changeGold(-goldDiff);
-                if (TreasureHunter.getLose() == true){
-                    System.out.println(Colors.RED + "You have a debt of " + Colors.YELLOW + hunter.getGold() + " gold.");
-                    System.out.println("You spend the rest of your days paying back the debt.");
-                    System.out.println(Colors.WHITE + "You died of old age." + Colors.RESET);
+            } else{
+                printMessage = Colors.RED + "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
+                if (Math.random() > noTroubleChance) {
+                    printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
+                    printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + " gold." + Colors.RESET;
+                    hunter.changeGold(goldDiff);
+                } else {
+                    printMessage += Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
+                    printMessage += "\nYou lost the brawl and pay " + Colors.RESET + Colors.YELLOW + goldDiff + " gold." + Colors.RESET;
+                    System.out.println(printMessage);
+                    hunter.changeGold(-goldDiff);
+                    if (TreasureHunter.getLose()){
+                        System.out.println(Colors.RED + "You have a debt of " + Colors.YELLOW + hunter.getGold() + " gold.");
+                        System.out.println("You spend the rest of your days paying back the debt.");
+                        System.out.println(Colors.WHITE + "You died of old age." + Colors.RESET);
+                    }
                 }
             }
         }

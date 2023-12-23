@@ -8,14 +8,15 @@ import java.util.Scanner;
 
 public class Shop {
     // constants
-    private static final int WATER_COST = 2;
-    private static final int ROPE_COST = 4;
-    private static final int MACHETE_COST = 6;
-    private static final int BOOTS_COST = 8;
-    private static final int HORSE_COST = 12;
-    private static final int BOAT_COST = 20;
-    private static final int SHOVEL_COST = 8;
-    private static final int SWORD_COST = 0;
+    private static int WATER_COST = 2;
+    private static int ROPE_COST = 4;
+    private static int MACHETE_COST = 6;
+    private static int BOOTS_COST = 8;
+    private static int HORSE_COST = 12;
+    private static int BOAT_COST = 20;
+    private static int SHOVEL_COST = 8;
+    private static int SWORD_COST = 0;
+    public static boolean hasSword = false;
 
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class Shop {
     // instance variables
     private double markdown;
     private Hunter customer;
-    private TreasureHunter treasureHunter;
+    public TreasureHunter treasureHunter;
 
     /**
      * The Shop constructor takes in a markdown value and leaves customer null until one enters the shop.
@@ -34,7 +35,27 @@ public class Shop {
         this.markdown = markdown;
         customer = null; // is set in the enter method
     }
-
+    public static void setWATERCOST(int num){
+        WATER_COST = num;
+    }
+    public static void setROPECOST(int num){
+        ROPE_COST = num;
+    }
+    public static void setMACHETECOST(int num){
+        MACHETE_COST = num;
+    }
+    public static void setHORSECOST(int num){
+        HORSE_COST = num;
+    }
+    public static void setBOATCOST(int num){
+        BOAT_COST = num;
+    }
+    public static void setBOOTSCOST(int num){
+        BOOTS_COST = num;
+    }
+    public static void setSHOVELCOST(int num){
+        SHOVEL_COST = num;
+    }
     /**
      * Method for entering the shop.
      *
@@ -47,12 +68,15 @@ public class Shop {
 
         if (buyOrSell.equals("b")) {
             System.out.println("Welcome to the shop! We have the finest wares in town.");
+            if (TreasureHunter.hasSword){
+                System.out.println(Colors.BLACK + "The shopkeeper sees your legendary sword and realizes you are the hero" + Colors.RESET);
+            }
             System.out.println("Currently we have the following items:");
             System.out.println(inventory());
             System.out.print("What're you lookin' to buy? ");
             String item = SCANNER.nextLine().toLowerCase();
             int cost = checkMarketPrice(item, true);
-            if (cost == 0) {
+            if (cost == 0 && !TreasureHunter.samuraiMode) {
                 System.out.println("We ain't got none of those.");
             } else {
                 System.out.print("It'll cost you " + Colors.YELLOW + cost + " gold."  + Colors.RESET + " Buy it (y/n)? ");
@@ -94,7 +118,7 @@ public class Shop {
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
         str += "Shovel: " + SHOVEL_COST + " gold\n";
-        if (treasureHunter.isSamuraiMode()) {
+        if (TreasureHunter.samuraiMode) {
             str += "Sword: " + SWORD_COST + " gold\n";
         }
         return str;
@@ -164,6 +188,8 @@ public class Shop {
             return BOOTS_COST;
         } else if (item.equals("shovel")){
             return SHOVEL_COST;
+        } else if (item.equals("sword")){
+            return SWORD_COST;
         } else {
             return 0;
         }
